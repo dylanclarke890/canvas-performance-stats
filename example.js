@@ -1,9 +1,15 @@
 let stop = false,
   now,
   lastFrame;
+const fpsInterval = 1000 / 60;
+let stats;
 
 (function startAnimating() {
   lastFrame = window.performance.now();
+  stats = new Stats({
+    appendTo: document.body,
+    domElementStyles: { position: "absolute", left: "calc(50% - 20px)", top: "calc(50% - 15px)" },
+  });
   animate();
 })();
 
@@ -12,8 +18,8 @@ function animate(newtime) {
   requestAnimationFrame(animate);
   now = newtime;
   const elapsed = now - lastFrame;
-  if (elapsed > settings.fpsInterval) {
-    lastFrame = now - (elapsed % settings.fpsInterval);
-    update();
+  if (elapsed > fpsInterval) {
+    lastFrame = now - (elapsed % fpsInterval);
+    stats.update();
   }
 }
