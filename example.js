@@ -7,8 +7,12 @@ let stats;
 (function startAnimating() {
   lastFrame = window.performance.now();
   stats = new Stats({
-    appendTo: document.body,
-    domElementStyles: { position: "absolute", left: "calc(50% - 20px)", top: "calc(50% - 15px)" },
+    target: document.body,
+    containerElementStyles: {
+      position: "absolute",
+      left: "calc(50% - 20px)",
+      top: "calc(50% - 15px)",
+    },
   });
   animate();
 })();
